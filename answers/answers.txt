@@ -1,0 +1,66 @@
+1. What are all the types of pokemon that a pokemon can have?
+    SELECT * FROM types;
+
+2. What is the name of the pokemon with id 45?
+    SELECT * FROM pokemons WHERE ID = '45';
+
+3. How many pokemon are there?
+    SELECT MAX(id) FROM pokemons;
+
+4. How many types are there?
+    SELECT MAX(id) FROM types;
+
+5. How many pokemon have a secondary type?
+    SELECT * FROM pokemons WHERE secondary_type IS NOT NULL;   316 rows in set (0.00 sec)
+
+6.What is each pokemon's primary type?
+    SELECT pokemons.name, types.name
+        -> FROM pokemons
+        -> INNER JOIN types ON pokemons.primary_type=types.id;
+
+
+7.What is Rufflet's secondary type?
+SELECT pokemons.name, types.name
+    -> FROM pokemons
+    -> INNER JOIN types ON pokemons.secondary_type=types.id
+    -> WHERE pokemons.name = 'Rufflet';
+
+8.What are the names of the pokemon that belong to the trainer with trainerID 303?
+    SELECT pokemons.name
+        -> FROM pokemons
+        -> INNER JOIN pokemon_trainer
+        -> ON pokemon_trainer.pokemon_id = pokemons.id
+        -> INNER JOIN trainers
+        -> ON pokemon_trainer.trainerID = trainers.trainerID
+        -> WHERE trainers.trainerID = 303;
+
+9.How many pokemon have a secondary type Poison
+SELECT pokemons.name, types.name
+    -> FROM pokemons
+    -> INNER JOIN types ON pokemons.secondary_type=types.id
+    -> WHERE pokemons.secondary_type = '7';
+
+10. What are all the primary types and how many pokemon have that type?
+    SELECT DISTINCT primary_type FROM pokemons;
+    SELECT * FROM pokemons WHERE primary_type = '1';
+    SELECT * FROM pokemons WHERE primary_type = '2';
+    SELECT * FROM pokemons WHERE primary_type = '3';
+    SELECT * FROM pokemons WHERE primary_type = '4';
+    SELECT * FROM pokemons WHERE primary_type = '5';
+    SELECT * FROM pokemons WHERE primary_type = '6';
+    SELECT * FROM pokemons WHERE primary_type = '7';
+    SELECT * FROM pokemons WHERE primary_type = '8';
+    SELECT * FROM pokemons WHERE primary_type = '9';
+    SELECT * FROM pokemons WHERE primary_type = '10';
+    SELECT * FROM pokemons WHERE primary_type = '11';
+    SELECT * FROM pokemons WHERE primary_type = '12';
+    SELECT * FROM pokemons WHERE primary_type = '13';
+    SELECT * FROM pokemons WHERE primary_type = '14';
+    SELECT * FROM pokemons WHERE primary_type = '15';
+    SELECT * FROM pokemons WHERE primary_type = '16';
+    SELECT * FROM pokemons WHERE primary_type = '17';
+    SELECT * FROM pokemons WHERE primary_type = '18';
+
+11. How many pokemon at level 100 does each trainer with at least one level 100 pokemone have? (Hint: your query should not display a trainer
+    SELECT trainerID, COUNT(pokemon_id) FROM pokemon_trainer GROUP BY(trainerID) HAVING MAX(pokelevel = 100);
+12. How many pokemon only belong to one trainer and no other?
