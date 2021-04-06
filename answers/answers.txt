@@ -74,3 +74,17 @@ SELECT pokemons.name, types.name
         -> ) as ONLY_ONCE;
 
 13. FINAL REPORT
+    SELECT p.name as "Pokemon Name",
+           trainers.trainername as "Trainer Name",
+           pokemon_trainer.pokelevel as "Pokemon Level",
+           types.name as "Primary Type",
+           t.name as "Secondary Type",
+           AVG(pokeLevel) as "Score"
+    FROM trainers
+        JOIN pokemon_trainer
+        ON trainers.trainerID = pokemon_trainer.trainerID
+        JOIN pokemons p ON pokemon_trainer.pokemon_id = p.id
+        JOIN types on p.primary_type = types.id
+        JOIN types t on p.secondary_type = t.id
+        GROUP BY p.name, trainers.trainername, pokemon_trainer.pokelevel, types.name, t.name
+        ORDER BY AVG(pokelevel) desc;
